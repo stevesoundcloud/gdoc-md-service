@@ -5,7 +5,7 @@ package(default_visibility = ["//visibility:public"])
 appengine_war(
     name = "backend",
     data = [":webapp"],
-    data_path = "/backend/webapp",
+    data_path = "/service/webapp",
     jars = [":app_deploy.jar"],
 )
 
