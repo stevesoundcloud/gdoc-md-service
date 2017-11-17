@@ -25,6 +25,10 @@ curl https://your-appengine-service-id.appspot.com/foo
 {'requested' : '/foo'}
 ```
 
+## Scenario GDocs
+
+See [this gdrive folder](https://drive.google.com/drive/folders/1SyDE0Ult3-PTh-dHAfOOkr7pikkKmASW).
+
 ## Project conventions
 
 ### Git

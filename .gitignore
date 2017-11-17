@@ -3,3 +3,5 @@ bazel-*
 *.war
 .idea
 *.iml
+.DS_Store
+out/

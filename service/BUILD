@@ -1,9 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 load("@io_bazel_rules_appengine//appengine:appengine.bzl", "appengine_war")
 load("@rules_intellij_generate//:def.bzl",
-    "intellij_source_java_library",
-    "MAVEN_STANDARD_JAVA_SOURCE_FOLDER_MAP",
-    "MAVEN_STANDARD_JAVA_TEST_FOLDER_MAP")
+    "intellij_source_java_library")
 
 appengine_war(
     name = "backend",
@@ -19,7 +17,7 @@ filegroup(
 
 intellij_source_java_library(
     name="lib",
-    source_folder_to_wildcard_map=MAVEN_STANDARD_JAVA_SOURCE_FOLDER_MAP,
+    source_folder_to_wildcard_map={"javasrc":"**/*.java"},
     deps=[
         "@javax_servlet_api//jar",
         "@com_google_appengine_java//:api",
@@ -32,12 +30,8 @@ intellij_source_java_library(
 # run directly, only used as a library).
 java_binary(
     name = "app",
-    # srcs = glob(["src/main/java/**/*.java"]),
     main_class = "does.not.exist",
-    runtime_deps = [
-        ":lib"
-        # "@io_bazel_rules_appengine//appengine:javax.servlet.api",
-    ],
+    runtime_deps = [":lib"],
 )
 
 load("@rules_intellij_generate//:def.bzl", "intellij_iml")

@@ -1,4 +1,4 @@
-package com.google.bazel.example.app;
+package gdocmd.service;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

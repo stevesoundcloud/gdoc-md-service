@@ -4,7 +4,7 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
   <servlet>
     <servlet-name>my-app</servlet-name>
-    <servlet-class>com.google.bazel.example.app.MyAppServlet</servlet-class>
+    <servlet-class>gdocmd.service.MyAppServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>my-app</servlet-name>
@@ -13,7 +13,7 @@
 
   <servlet>
     <servlet-name>my-cron</servlet-name>
-    <servlet-class>com.google.bazel.example.app.MyCronServlet</servlet-class>
+    <servlet-class>gdocmd.service.MyCronServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>my-cron</servlet-name>
