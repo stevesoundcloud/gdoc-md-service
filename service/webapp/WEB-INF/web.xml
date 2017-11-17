@@ -6,10 +6,17 @@
     <servlet-name>my-app</servlet-name>
     <servlet-class>com.google.bazel.example.app.MyAppServlet</servlet-class>
   </servlet>
-
   <servlet-mapping>
     <servlet-name>my-app</servlet-name>
-    <url-pattern>/*</url-pattern>
+    <url-pattern>/testapp/*</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>my-cron</servlet-name>
+    <servlet-class>com.google.bazel.example.app.MyCronServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>my-cron</servlet-name>
+    <url-pattern>/testcron/*</url-pattern>
+  </servlet-mapping>
 </web-app>
