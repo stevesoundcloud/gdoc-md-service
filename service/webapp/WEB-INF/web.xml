@@ -2,21 +2,80 @@
 <!DOCTYPE web-app PUBLIC "-//Oracle Corporation//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
-  <servlet>
-    <servlet-name>my-app</servlet-name>
-    <servlet-class>gdocmd.service.MyAppServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>my-app</servlet-name>
-    <url-pattern>/testapp/*</url-pattern>
-  </servlet-mapping>
+  <filter>
+      <filter-name>guiceFilter</filter-name>
+      <filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
+  </filter>
 
-  <servlet>
-    <servlet-name>my-cron</servlet-name>
-    <servlet-class>gdocmd.service.MyCronServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>my-cron</servlet-name>
-    <url-pattern>/testcron/*</url-pattern>
-  </servlet-mapping>
+  <filter-mapping>
+      <filter-name>guiceFilter</filter-name>
+      <url-pattern>*</url-pattern>
+  </filter-mapping>
+
+  <listener>
+    <listener-class>gdocmd.service.GuiceServletConfig</listener-class>
+  </listener>
+
+  <!--<servlet>-->
+    <!--<servlet-name>my-app-servlet</servlet-name>-->
+    <!--<servlet-class>gdocmd.service.MyAppServlet</servlet-class>-->
+  <!--</servlet>-->
+  <!--<servlet-mapping>-->
+    <!--<servlet-name>my-app-servlet</servlet-name>-->
+    <!--<url-pattern>/testapp/*</url-pattern>-->
+  <!--</servlet-mapping>-->
+
+  <!--<servlet>-->
+    <!--<servlet-name>my-cron-servlet</servlet-name>-->
+    <!--<servlet-class>gdocmd.service.MyCronServlet</servlet-class>-->
+  <!--</servlet>-->
+  <!--<servlet-mapping>-->
+    <!--<servlet-name>my-cron-servlet</servlet-name>-->
+    <!--<url-pattern>/testcron/*</url-pattern>-->
+  <!--</servlet-mapping>-->
+
+  <!--<servlet>-->
+    <!--<servlet-name>oauth-authorization-code-servlet</servlet-name>-->
+    <!--<servlet-class>gdocmd.service.OauthAuthorizationCodeServlet</servlet-class>-->
+  <!--</servlet>-->
+  <!--<servlet-mapping>-->
+    <!--<servlet-name>oauth-authorization-code-servlet</servlet-name>-->
+    <!--<url-pattern>/do-oauth-flow</url-pattern>-->
+  <!--</servlet-mapping>-->
+
+  <!--<servlet>-->
+    <!--<servlet-name>fetch-oauth-token-servlet</servlet-name>-->
+    <!--<servlet-class>gdocmd.service.FetchOauthTokenServlet</servlet-class>-->
+  <!--</servlet>-->
+  <!--<servlet-mapping>-->
+    <!--<servlet-name>fetch-oauth-token-servlet</servlet-name>-->
+    <!--<url-pattern>/fetch-oauth-token</url-pattern>-->
+  <!--</servlet-mapping>-->
+
+  <!--<servlet>-->
+    <!--<servlet-name>administrative-servlet</servlet-name>-->
+    <!--<servlet-class>gdocmd.service.AdministrativeServlet</servlet-class>-->
+  <!--</servlet>-->
+  <!--<servlet-mapping>-->
+    <!--<servlet-name>administrative-servlet</servlet-name>-->
+    <!--<url-pattern>/</url-pattern>-->
+  <!--</servlet-mapping>-->
+
+  <!--<servlet>-->
+    <!--<servlet-name>save-service-properties</servlet-name>-->
+    <!--<servlet-class>gdocmd.service.AdministrativeServlet</servlet-class>-->
+  <!--</servlet>-->
+  <!--<servlet-mapping>-->
+    <!--<servlet-name>save-service-properties</servlet-name>-->
+    <!--<url-pattern>/save-service-properties</url-pattern>-->
+  <!--</servlet-mapping>-->
+
+  <!--<servlet>-->
+    <!--<servlet-name>test-drive-servlet</servlet-name>-->
+    <!--<servlet-class>gdocmd.service.TestDriveServlet</servlet-class>-->
+  <!--</servlet>-->
+  <!--<servlet-mapping>-->
+    <!--<servlet-name>test-drive-servlet</servlet-name>-->
+    <!--<url-pattern>/test-drive</url-pattern>-->
+  <!--</servlet-mapping>-->
 </web-app>

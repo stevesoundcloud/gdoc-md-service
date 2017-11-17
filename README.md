@@ -1,18 +1,41 @@
+
+TODO:
+
+- oauth flow - oauth token/code saves property named user.<user-id> in system.properties file
+  - need to implement a DataStore that's backed by this file
+
 ## Running Locally
 
+You will need a client id and client secret, generated from your google cloud console (see OAuth notes, below)
+
+Start the datastore emulator:
 ```
-bazel build //...
+gcloud beta emulators datastore start
+```
+
+```
+OAUTH_CLIENT_ID=xx.apps.googleusercontent.com OAUTH_CLIENT_SECRET=yy bazel run //service:backend
+```
 (bazel does a bunch of stuff...)
 
-cd service/webapp
-../../bazel-bin/service/backend --port=12345
-
-...should result in output ending in...
-INFO: Dev App Server is now running
-
-curl localhost:12345/foo
-{'requested' : '/foo'}
+...should result in output containing...
 ```
+INFO: Module instance default is running at http://localhost:8080/
+```
+and ending in...
+
+```
+INFO: Dev App Server is now running
+```
+
+then try curl'ing...
+
+```
+curl localhost:8080/testapp
+{'requested' : '/testapp'}
+```
+
+You can also [browse the local datastore](http://localhost:8080/_ah/admin).
 
 ## AppEngine Deployment
 
@@ -28,6 +51,42 @@ curl https://your-appengine-service-id.appspot.com/foo
 ## Scenario GDocs
 
 See [this gdrive folder](https://drive.google.com/drive/folders/1SyDE0Ult3-PTh-dHAfOOkr7pikkKmASW).
+
+## OAuth notes
+
+Q: What out of this do users who run the service need to do?
+
+https://stackoverflow.com/a/22865286
+
+- Choose or make the account, ALL of whose gdrive docs will be visible to
+  the converter service. STRONGLY suggest that you make a dedicated
+  account with a name that's very obvious, like "GdocToMarkdownBot".
+  Log in to this account.
+- Go to GCloud Console
+  - Make a project (e.g., "gdoc-to-md-service")
+  - Go to the API Library ("Use Google APIs")
+  - Search for "Drive API"
+  - Enable this API
+  - Click "Manage"
+  - In the left-hand menu, select "Credentials"
+  - Click "Create credentials (dropdown) -> OAuth Client ID"
+  - Select "Web Application"
+  - Click "Create"
+  - Client ID and Secret will pop up. Record these in a safe place,
+    like a password manager app (and NOT in source control).
+  - Authorized redirect URIs - must contain http://localhost:59402/Callback
+    in order for the Foo example to work
+
+..I think users just need to do the following part...
+
+- Go to the OAuth Playground
+  - https://developers.google.com/oauthplayground/
+  - Select "drive readonly" as the api scope
+  - Check the box to get a refresh token
+  - Click Exchange auth code for tokens
+  - Get the Refresh Token, and store this in a secure place. This is the
+    stand-in for an account username/password
+
 
 ## Project conventions
 

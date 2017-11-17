@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class TestUtil {
+public class TestFunctions {
   public static <K, V> Map<K, V> emptyMap() {
     return Collections.unmodifiableMap(new HashMap<>());
   }

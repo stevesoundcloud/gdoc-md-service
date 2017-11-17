@@ -2,7 +2,9 @@ load("@rules_intellij_generate//:def.bzl", "intellij_modules_xml")
 intellij_modules_xml(
     name = "modules_xml",
     deps = [
+        "//common:iml",
         "//convert:iml",
+        "//gdrive:iml",
         "//service:iml",
     ]
 )

@@ -5,3 +5,4 @@ bazel-*
 *.iml
 .DS_Store
 out/
+.python-version
