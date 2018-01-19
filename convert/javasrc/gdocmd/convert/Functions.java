@@ -26,24 +26,7 @@ import java.util.StringJoiner;
 
 import static java.lang.String.format;
 
-public class Util {
-  public static String readFile(String path) {
-    checkState(path != null, "expected file path to not be null");
-    Path fsPath = FileSystems.getDefault().getPath(path);
-    checkState(fsPath.toFile().exists(), format("expected file to exist: '%s'", path));
-    try {
-      return new String(Files.readAllBytes(fsPath));
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-  }
-
-  public static void checkState(boolean ok, String failureMessage) {
-    if (!ok) {
-      throw new IllegalStateException(failureMessage);
-    }
-  }
-
+public class Functions {
   public static List<String> xpathList(String xmlDocument, String xpath) {
     NodeList nodeList = xpathNodeListFromDoc(xpath, parseXml(xmlDocument));
     List<String> results = new ArrayList<>();
@@ -100,11 +83,5 @@ public class Util {
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
-  }
-
-  public static String joinStringList(String joinWith, List<String> stringsToJoin) {
-    StringJoiner stringJoiner = new StringJoiner(joinWith);
-    stringsToJoin.forEach(s -> stringJoiner.add(s));
-    return stringJoiner.toString();
   }
 }

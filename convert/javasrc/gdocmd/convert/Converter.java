@@ -3,9 +3,9 @@ package gdocmd.convert;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static gdocmd.convert.Util.checkState;
-import static gdocmd.convert.Util.joinStringList;
-import static gdocmd.convert.Util.xpathList;
+import static gdocmd.common.Functions.checkState;
+import static gdocmd.common.Functions.joinStringList;
+import static gdocmd.convert.Functions.xpathList;
 import static java.lang.String.format;
 
 class Converter {

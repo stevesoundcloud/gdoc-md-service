@@ -2,9 +2,9 @@ package gdocmd.convert;
 
 import org.junit.jupiter.api.Test;
 
+import static gdocmd.common.Functions.readFile;
 import static gdocmd.convert.Converter.convert;
-import static gdocmd.convert.TestUtil.mapOf;
-import static gdocmd.convert.Util.readFile;
+import static gdocmd.convert.TestFunctions.mapOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ScenariosTest {

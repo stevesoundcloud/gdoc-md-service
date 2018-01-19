@@ -6,6 +6,9 @@ load("@rules_intellij_generate//:def.bzl",
 intellij_source_java_library(
     name="lib",
     source_folder_to_wildcard_map={"javasrc":"**/*.java"},
+    deps=[
+        "//common:iml",
+    ]
 )
 
 load("@rules_junit5//:def.bzl", "JUNIT5_MINIMAL_DEPS")
@@ -13,6 +16,8 @@ intellij_source_java_library(
     name="test_lib",
     source_folder_to_wildcard_map={"javatest":"**/*.java"},
     deps=[
+        "//common:iml",
+
         ":lib",
     ] + JUNIT5_MINIMAL_DEPS,
 )
