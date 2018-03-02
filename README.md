@@ -1,4 +1,7 @@
 
+- admin url: http://localhost:8080/_ah/admin/
+
+
 TODO:
 
 - oauth flow - oauth token/code saves property named user.<user-id> in system.properties file
