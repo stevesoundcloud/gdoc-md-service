@@ -21,12 +21,13 @@ import static gdocmd.common.config.storage.ServiceProperties.APP_OAUTH_CLIENT_ID
 import static gdocmd.common.config.storage.ServiceProperties.APP_OAUTH_CLIENT_SECRET;
 import static gdocmd.common.config.storage.ServiceProperties.END_USER_OAUTH_ACCESS_TOKEN;
 import static gdocmd.common.config.storage.ServiceProperties.END_USER_OAUTH_REQUEST_TOKEN;
+import static gdocmd.common.config.storage.ServiceProperties.GCS_OUTBOX_BUCKET_NAME;
 import static java.lang.String.format;
 
 public class GcsServicePropertiesStorage implements ServicePropertiesStorage {
-  private static final String STORAGE_BUCKET_NAME = envVarValue("STORAGE_BUCKET_NAME");
+  private static final String SERVICE_PROPERTIES_STORAGE_BUCKET_NAME = envVarValue("SERVICE_PROPERTIES_STORAGE_BUCKET_NAME");
   private static final String SERVICE_DOT_PROPERTIES = "service.properties";
-  private static final GcsFilename SERVICE_DOT_PROPERTIES_GCS_FILE = new GcsFilename(STORAGE_BUCKET_NAME, SERVICE_DOT_PROPERTIES);
+  private static final GcsFilename SERVICE_DOT_PROPERTIES_GCS_FILE = new GcsFilename(SERVICE_PROPERTIES_STORAGE_BUCKET_NAME, SERVICE_DOT_PROPERTIES);
 
   private static void oauthLogInfo(Object obj) {
     logInfo("SERVICE CONFIG", obj);
@@ -46,6 +47,7 @@ public class GcsServicePropertiesStorage implements ServicePropertiesStorage {
       sp.appOauthClientSecret = existingProperties.getProperty(APP_OAUTH_CLIENT_SECRET);
       sp.endUserOauthAccessToken = existingProperties.getProperty(END_USER_OAUTH_ACCESS_TOKEN);
       sp.endUserOauthRefreshToken = existingProperties.getProperty(END_USER_OAUTH_REQUEST_TOKEN);
+      sp.gcsOutboxBucketName = existingProperties.getProperty(GCS_OUTBOX_BUCKET_NAME);
       return Optional.of(sp);
     } catch (IOException e) {
       throw Throwables.propagate(e);

@@ -14,6 +14,7 @@ import java.util.Map;
 
 import static gdocmd.common.config.storage.ServiceProperties.APP_OAUTH_CLIENT_ID;
 import static gdocmd.common.config.storage.ServiceProperties.APP_OAUTH_CLIENT_SECRET;
+import static gdocmd.common.config.storage.ServiceProperties.GCS_OUTBOX_BUCKET_NAME;
 
 @Singleton
 public class AdministrativeServlet extends HttpServlet {
@@ -35,6 +36,7 @@ public class AdministrativeServlet extends HttpServlet {
       "<form action=\"/save-service-properties\" method=\"POST\">\n" +
       "  OAuth Client Id: <input name=\"" + APP_OAUTH_CLIENT_ID + "\" type=\"text\"></input><br/>\n" +
       "  OAuth Client Secret: <input name=\"" + APP_OAUTH_CLIENT_SECRET + "\" type=\"text\"></input><br/>\n" +
+      "  Outbox GCS Bucket: <input name=\"" + GCS_OUTBOX_BUCKET_NAME + "\" type=\"text\"></input><br/>\n" +
       "  <input type=\"submit\"></input>\n" +
       "</form>\n" +
       "</p>\n" +
@@ -48,8 +50,9 @@ public class AdministrativeServlet extends HttpServlet {
       simpleParameterMap.put(key.toString(), ((String[])request.getParameterMap().get(key))[0]);
     }
 
-    serviceConfig.saveClientIdAndSecret(
+    serviceConfig.saveClientIdAndSecretAndGcsOutboxBucketName(
       simpleParameterMap.get(APP_OAUTH_CLIENT_ID),
-      simpleParameterMap.get(APP_OAUTH_CLIENT_SECRET));
+      simpleParameterMap.get(APP_OAUTH_CLIENT_SECRET),
+      simpleParameterMap.get(GCS_OUTBOX_BUCKET_NAME));
   }
 }

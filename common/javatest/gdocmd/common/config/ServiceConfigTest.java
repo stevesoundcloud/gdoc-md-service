@@ -23,7 +23,7 @@ class ServiceConfigTest {
   public void saveClientIdAndSecret() {
     assertFalse(serviceConfig.loadGoogleClientSecretsFromGcsServicePropertiesFile().isPresent());
 
-    serviceConfig.saveClientIdAndSecret("client-id", "client-secret");
+    serviceConfig.saveClientIdAndSecretAndGcsOutboxBucketName("client-id", "client-secret");
 
     ServiceProperties expected = new ServiceProperties();
     expected.appOauthClientId = "client-id";
@@ -47,7 +47,7 @@ class ServiceConfigTest {
 
     assertFalse(serviceConfig.loadGoogleCredentialFromServicePropertiesFile().isPresent());
 
-    serviceConfig.saveClientIdAndSecret("client-id", "client-secret");
+    serviceConfig.saveClientIdAndSecretAndGcsOutboxBucketName("client-id", "client-secret");
 
     ServiceProperties expected = new ServiceProperties();
     expected.appOauthClientId = "client-id";

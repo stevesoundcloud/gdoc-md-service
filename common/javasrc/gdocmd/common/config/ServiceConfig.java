@@ -19,7 +19,7 @@ public class ServiceConfig {
     this.servicePropertiesStorage = servicePropertiesStorage;
   }
 
-  public void saveClientIdAndSecret(String clientId, String clientSecret) {
+  public void saveClientIdAndSecretAndGcsOutboxBucketName(String clientId, String clientSecret, String gcsOutboxBucketName) {
     ServiceProperties sp = new ServiceProperties();
     Optional<ServiceProperties> maybeServiceProperties = servicePropertiesStorage.load();
     if (maybeServiceProperties.isPresent()) {
@@ -27,6 +27,7 @@ public class ServiceConfig {
     }
     sp.appOauthClientId = clientId;
     sp.appOauthClientSecret = clientSecret;
+    sp.gcsOutboxBucketName = gcsOutboxBucketName;
     servicePropertiesStorage.save(sp);
   }
 

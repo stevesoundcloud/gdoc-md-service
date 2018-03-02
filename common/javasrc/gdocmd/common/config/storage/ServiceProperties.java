@@ -14,6 +14,7 @@ public class ServiceProperties {
   public static final String APP_OAUTH_CLIENT_SECRET = "oauth-client-secret";
   public static final String END_USER_OAUTH_ACCESS_TOKEN = "end-user-oauth-access-token";
   public static final String END_USER_OAUTH_REQUEST_TOKEN = "end-user-oauth-request-token";
+  public static final String GCS_OUTBOX_BUCKET_NAME = "gcs-outbox-bucket-name";
 
   public static ServiceProperties load(String propertiesContent) {
     try {
@@ -34,6 +35,7 @@ public class ServiceProperties {
   public String appOauthClientSecret;
   public String endUserOauthAccessToken;
   public String endUserOauthRefreshToken;
+  public String gcsOutboxBucketName;
 
   public Properties asJavaUtilProperties() {
     Properties p = new Properties();
@@ -41,15 +43,17 @@ public class ServiceProperties {
     if (appOauthClientSecret != null) p.setProperty(APP_OAUTH_CLIENT_SECRET, appOauthClientSecret);
     if (endUserOauthAccessToken != null) p.setProperty(END_USER_OAUTH_ACCESS_TOKEN, endUserOauthAccessToken);
     if (endUserOauthRefreshToken != null) p.setProperty(END_USER_OAUTH_REQUEST_TOKEN, endUserOauthRefreshToken);
+    if (gcsOutboxBucketName != null) p.setProperty(GCS_OUTBOX_BUCKET_NAME, gcsOutboxBucketName);
     return p;
   }
 
   public String toString() {
-    return format("ServiceProperties: clientid=%s clientsecret=%s accesstoken=%s requesttoken=%s",
+    return format("ServiceProperties: clientid=%s clientsecret=%s accesstoken=%s requesttoken=%s gcsoutboxbucketname=%s",
       appOauthClientId,
       Functions.mask(appOauthClientSecret),
       Functions.mask(endUserOauthAccessToken),
-      Functions.mask(endUserOauthRefreshToken));
+      Functions.mask(endUserOauthRefreshToken),
+      gcsOutboxBucketName);
   }
 
   @Override
@@ -65,7 +69,9 @@ public class ServiceProperties {
       return false;
     if (endUserOauthAccessToken != null ? !endUserOauthAccessToken.equals(that.endUserOauthAccessToken) : that.endUserOauthAccessToken != null)
       return false;
-    return endUserOauthRefreshToken != null ? endUserOauthRefreshToken.equals(that.endUserOauthRefreshToken) : that.endUserOauthRefreshToken == null;
+    if (endUserOauthRefreshToken != null ? !endUserOauthRefreshToken.equals(that.endUserOauthRefreshToken) : that.endUserOauthRefreshToken != null)
+      return false;
+    return gcsOutboxBucketName != null ? gcsOutboxBucketName.equals(that.gcsOutboxBucketName) : that.gcsOutboxBucketName == null;
   }
 
   @Override
@@ -74,6 +80,7 @@ public class ServiceProperties {
     result = 31 * result + (appOauthClientSecret != null ? appOauthClientSecret.hashCode() : 0);
     result = 31 * result + (endUserOauthAccessToken != null ? endUserOauthAccessToken.hashCode() : 0);
     result = 31 * result + (endUserOauthRefreshToken != null ? endUserOauthRefreshToken.hashCode() : 0);
+    result = 31 * result + (gcsOutboxBucketName != null ? gcsOutboxBucketName.hashCode() : 0);
     return result;
   }
 }
