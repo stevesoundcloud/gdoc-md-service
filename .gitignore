@@ -1,4 +1,3 @@
-bazel-*
 *.jar
 *.war
 .idea
@@ -6,3 +5,5 @@ bazel-*
 .DS_Store
 out/
 .python-version
+target/
+.idea/

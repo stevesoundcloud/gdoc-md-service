@@ -1,41 +1,15 @@
+https://github.com/GoogleCloudPlatform/app-maven-plugin
+
+run local dev server:
+STORAGE_BUCKET_NAME=sc-gdocmd-dev mvn -e appengine:run
+
+
+You can also [browse the local datastore](http://localhost:8080/_ah/admin).
 
 TODO:
 
 - oauth flow - oauth token/code saves property named user.<user-id> in system.properties file
   - need to implement a DataStore that's backed by this file
-
-## Running Locally
-
-You will need a client id and client secret, generated from your google cloud console (see OAuth notes, below)
-
-Start the datastore emulator:
-```
-gcloud beta emulators datastore start
-```
-
-```
-OAUTH_CLIENT_ID=xx.apps.googleusercontent.com OAUTH_CLIENT_SECRET=yy bazel run //service:backend
-```
-(bazel does a bunch of stuff...)
-
-...should result in output containing...
-```
-INFO: Module instance default is running at http://localhost:8080/
-```
-and ending in...
-
-```
-INFO: Dev App Server is now running
-```
-
-then try curl'ing...
-
-```
-curl localhost:8080/testapp
-{'requested' : '/testapp'}
-```
-
-You can also [browse the local datastore](http://localhost:8080/_ah/admin).
 
 ## AppEngine Deployment
 

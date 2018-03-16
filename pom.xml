@@ -1,0 +1,51 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <version>0.0.1</version>
+    <groupId>gdocmd</groupId>
+    <artifactId>gdoc-md-service</artifactId>
+    <packaging>war</packaging>
+
+    <parent>
+        <relativePath>./parent-pom.xml</relativePath>
+        <groupId>gdocmd</groupId>
+        <artifactId>parent</artifactId>
+        <version>HEAD-SNAPSHOT</version>
+    </parent>
+
+    <dependencies>
+
+      <!-- common -->
+      <dependency><groupId>com.fasterxml.jackson.core</groupId>   <artifactId>jackson-core</artifactId>                    </dependency>
+      <dependency><groupId>com.google.api-client</groupId>        <artifactId>google-api-client</artifactId>               </dependency>
+      <dependency><groupId>com.google.api-client</groupId>        <artifactId>google-api-client-appengine</artifactId>     </dependency>
+      <dependency><groupId>com.google.appengine</groupId>         <artifactId>appengine-api-1.0-sdk</artifactId>           </dependency>
+      <dependency><groupId>com.google.appengine.tools</groupId>   <artifactId>appengine-gcs-client</artifactId>            </dependency>
+      <dependency><groupId>com.google.auth</groupId>              <artifactId>google-auth-library-oauth2-http</artifactId> </dependency>
+      <dependency><groupId>com.google.guava</groupId>             <artifactId>guava</artifactId>                           </dependency>
+      <dependency><groupId>com.google.http-client</groupId>       <artifactId>google-http-client</artifactId>              </dependency>
+      <dependency><groupId>com.google.http-client</groupId>       <artifactId>google-http-client-appengine</artifactId>    </dependency>
+      <dependency><groupId>com.google.http-client</groupId>       <artifactId>google-http-client-jackson2</artifactId>     </dependency>
+      <dependency><groupId>com.google.oauth-client</groupId>      <artifactId>google-oauth-client</artifactId>             </dependency>
+      <dependency><groupId>javax.inject</groupId>                 <artifactId>javax.inject</artifactId>                    </dependency>
+
+      <!-- gdrive -->
+      <dependency><groupId>com.google.apis</groupId>              <artifactId>google-api-services-drive</artifactId>       <version>v3-rev90-1.23.0</version> </dependency>
+
+      <!-- top-level -->
+      <dependency><groupId>com.google.inject</groupId>            <artifactId>guice</artifactId>                           </dependency>
+      <dependency><groupId>com.google.inject.extensions</groupId> <artifactId>guice-servlet</artifactId>                   </dependency>
+
+      <!-- TEST -->
+      <dependency><groupId>org.junit.jupiter</groupId>            <artifactId>junit-jupiter-api</artifactId>               </dependency>
+      <dependency><groupId>org.junit.jupiter</groupId>            <artifactId>junit-jupiter-engine</artifactId>            </dependency>
+      <dependency><groupId>org.junit.platform</groupId>           <artifactId>junit-platform-commons</artifactId>          </dependency>
+      <dependency><groupId>org.junit.platform</groupId>           <artifactId>junit-platform-console</artifactId>          </dependency>
+      <dependency><groupId>org.junit.platform</groupId>           <artifactId>junit-platform-engine</artifactId>           </dependency>
+      <dependency><groupId>org.junit.platform</groupId>           <artifactId>junit-platform-launcher</artifactId>         </dependency>
+      <dependency><groupId>org.junit.platform</groupId>           <artifactId>junit-platform-runner</artifactId>           </dependency>
+      <dependency><groupId>org.opentest4j</groupId>               <artifactId>opentest4j</artifactId>                      </dependency>
+      <dependency><groupId>org.apiguardian</groupId>              <artifactId>apiguardian-api</artifactId>                 </dependency>
+
+    </dependencies>
+
+</project>
