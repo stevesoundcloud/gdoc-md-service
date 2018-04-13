@@ -1,10 +1,16 @@
 https://github.com/GoogleCloudPlatform/app-maven-plugin
 
 run local dev server:
-STORAGE_BUCKET_NAME=sc-gdocmd-dev mvn -e appengine:run
+mvn -e appengine:run
+
+deploy
+mvn appengine:deploy
 
 
 You can also [browse the local datastore](http://localhost:8080/_ah/admin).
+
+
+https://cloud.google.com/appengine/docs/standard/python/microservices-on-app-engine
 
 TODO:
 
@@ -50,6 +56,8 @@ https://stackoverflow.com/a/22865286
     like a password manager app (and NOT in source control).
   - Authorized redirect URIs - must contain http://localhost:59402/Callback
     in order for the Foo example to work
+     - for dev: http://localhost:8080/fetch-oauth-token
+     - for prod: https://foo.appspot.com/fetch-oauth-token
 
 ..I think users just need to do the following part...
 
