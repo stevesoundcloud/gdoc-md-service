@@ -1,6 +1,12 @@
 package gdocmd.common;
 
+
+import com.google.api.client.util.IOUtils;
+import com.google.api.client.util.Throwables;
+
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -48,6 +54,15 @@ public class Functions {
   public static void logInfo(String category, Object obj) {
     Logger.getLogger("gdoc-md-service").info(format("%s: %s", category, obj));
   }
+
+  public static void copyStream(InputStream in, OutputStream out) {
+    try {
+      IOUtils.copy(in, out);
+    } catch (IOException e) {
+      throw Throwables.propagate(e);
+    }
+  }
+
 
   public static <K, V> Map<K, V> emptyMap() {
     return Collections.unmodifiableMap(new HashMap<>());

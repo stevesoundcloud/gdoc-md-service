@@ -28,8 +28,11 @@
       <dependency><groupId>com.google.oauth-client</groupId>      <artifactId>google-oauth-client</artifactId>             </dependency>
       <dependency><groupId>javax.inject</groupId>                 <artifactId>javax.inject</artifactId>                    </dependency>
 
-      <!-- convert -->
+      <!-- html to md -->
       <dependency><groupId>org.jsoup</groupId>                    <artifactId>jsoup</artifactId>                           </dependency>
+
+      <!-- convert -->
+      <dependency><groupId>org.apache.commons</groupId>           <artifactId>commons-compress</artifactId>                </dependency>
 
       <!-- gdrive -->
       <dependency><groupId>com.google.apis</groupId>              <artifactId>google-api-services-drive</artifactId>       </dependency>

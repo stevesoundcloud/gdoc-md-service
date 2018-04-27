@@ -10,11 +10,12 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.channels.Channels;
 import java.util.Optional;
 
 import static com.google.appengine.tools.cloudstorage.GcsServiceFactory.createGcsService;
+import static gdocmd.common.Functions.copyStream;
 import static java.nio.channels.Channels.newOutputStream;
 
 public class GcsFunctions {
@@ -41,21 +42,20 @@ public class GcsFunctions {
   }
 
   public static void saveToGcs(String filename, String mimetype, byte[] fileContents) {
-    saveToGcs(filename, mimetype, new ByteArrayInputStream(fileContents));
+    OutputStream outputStream = streamToGcs(filename, mimetype);
+    copyStream(new ByteArrayInputStream(fileContents), outputStream);
   }
 
-  public static void saveToGcs(String filename, String mimetype, InputStream fileContents) {
+  public static OutputStream streamToGcs(String filename, String mimetype) {
     GcsFilename gcsFile = gcsFile(filename);
 
     try {
-      IOUtils.copy(
-        fileContents,
-        newOutputStream(
-          createGcsService().createOrReplace(
-            gcsFile,
-            new GcsFileOptions.Builder()
-              .mimeType(mimetype)
-              .build())));
+      return newOutputStream(
+        createGcsService().createOrReplace(
+          gcsFile,
+          new GcsFileOptions.Builder()
+            .mimeType(mimetype)
+            .build()));
     } catch (IOException e) {
       throw Throwables.propagate(e);
     }

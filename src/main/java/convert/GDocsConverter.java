@@ -42,6 +42,9 @@ public class GDocsConverter {
       logger.println("==========");
       String htmlOutput = gDrive.exportToHtml(ref);
       logger.println(convertHtmlToMd(mapOf(format("%s.html", ref.id), htmlOutput)).entrySet().iterator().next().getValue());
+
+//      TarArchiveOutputStream archiveOutputStream = new TarArchiveOutputStream(streamToGcs("test.tar.gz", "application/tar+gzip"));
+//      archiveOutputStream.putArchiveEntry();
     }
   }
 }
