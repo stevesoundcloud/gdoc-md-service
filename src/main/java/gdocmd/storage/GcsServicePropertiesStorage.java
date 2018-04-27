@@ -1,5 +1,6 @@
 package gdocmd.storage;
 
+import com.google.appengine.api.appidentity.AppIdentityServiceFactory;
 import com.google.appengine.tools.cloudstorage.GcsFileOptions;
 import com.google.appengine.tools.cloudstorage.GcsFilename;
 import com.google.appengine.tools.cloudstorage.GcsInputChannel;
@@ -15,12 +16,11 @@ import java.nio.ByteBuffer;
 import java.util.Optional;
 import java.util.Properties;
 
-import static gdocmd.common.Functions.envVarValue;
 import static gdocmd.common.Functions.logInfo;
 import static java.lang.String.format;
 
 public class GcsServicePropertiesStorage implements ServicePropertiesStorage {
-  private static final String STORAGE_BUCKET_NAME = envVarValue("STORAGE_BUCKET_NAME");
+  private static final String STORAGE_BUCKET_NAME = AppIdentityServiceFactory.getAppIdentityService().getDefaultGcsBucketName();
   private static final String SERVICE_DOT_PROPERTIES = "service.properties";
   private static final GcsFilename SERVICE_DOT_PROPERTIES_GCS_FILE = new GcsFilename(STORAGE_BUCKET_NAME, SERVICE_DOT_PROPERTIES);
 

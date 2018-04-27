@@ -6,5 +6,4 @@
 
     <!-- see: https://cloud.google.com/appengine/docs/standard/java/runtime-java8 -->
     <runtime>java8</runtime>
-
 </appengine-web-app>

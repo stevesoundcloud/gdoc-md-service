@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static java.lang.String.format;
+
 @Singleton
 public class FetchOauthTokenServlet extends HttpServlet {
 
@@ -25,10 +27,15 @@ public class FetchOauthTokenServlet extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    String baseUrl = "Production".equals(System.getProperty("com.google.appengine.runtime.environment"))
+      ? format("https://%s.appspot.com/", System.getProperty("com.google.appengine.application.id"))
+      : "localhost:8080";
+
     TokenResponse tokenResponse =
       authorizationCodeFlowSource.getAuthorizationCodeFlow()
         .newTokenRequest(request.getParameter("code"))
-        .setRedirectUri("http://localhost:8080/fetch-oauth-token")
+        .setRedirectUri(format("%s/fetch-oauth-token", baseUrl))
         .execute();
 
     serviceConfig.saveEndUserAccessTokenAndRequestToken(tokenResponse.getAccessToken(), tokenResponse.getRefreshToken());
