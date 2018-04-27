@@ -1,8 +1,8 @@
 package gdocmd.service;
 
+import gdocmd.gdrive.GDrive;
 import gdocmd.gdrive.GDriveFileReference;
 import gdocmd.gdrive.GDriveSource;
-import gdocmd.gdrive.GDrive;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+
+import static gdocmd.common.Functions.mapOf;
+import static gdocmd.convert.Converter.convertHtmlToMd;
 
 @Singleton
 public class TestDriveServlet extends HttpServlet {
@@ -39,6 +42,14 @@ public class TestDriveServlet extends HttpServlet {
       response.getWriter().println(ref);
     }
 
-    response.getWriter().println(gDrive.exportToHtml(fileReferences.get(0)));
+    response.getWriter().println("==========");
+    response.getWriter().println("==========");
+    response.getWriter().println("==========");
+    String htmlOutput = gDrive.exportToHtml(fileReferences.get(0));
+    response.getWriter().println(htmlOutput);
+    response.getWriter().println("==========");
+    response.getWriter().println("==========");
+    response.getWriter().println("==========");
+    response.getWriter().println(convertHtmlToMd(mapOf("foo.html", htmlOutput)).entrySet().iterator().next().getValue());
   }
 }

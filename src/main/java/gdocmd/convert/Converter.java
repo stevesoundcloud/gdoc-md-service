@@ -1,19 +1,20 @@
 package gdocmd.convert;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static gdocmd.common.Functions.checkState;
-import static gdocmd.common.Functions.joinStringList;
 import static java.lang.String.format;
 
-class Converter {
+public class Converter {
 
   private static final String HTML_FILE_SUFFIX = ".html";
   private static final String MD_FILE_SUFFIX = ".md";
-  private static final String META_LINE = "<meta content=\"text/html; charset=UTF-8\" http-equiv=\"content-type\">";
 
-  public static Map<String, String> convert(Map<String, String> gdocHtmlZipPathToContent) {
+  public static Map<String, String> convertHtmlToMd(Map<String, String> gdocHtmlZipPathToContent) {
     checkState(!gdocHtmlZipPathToContent.isEmpty(), "empty gdoc content");
 
     Map.Entry<String, String> pathAndHtml = gdocHtmlZipPathToContent.entrySet().iterator().next();
@@ -26,11 +27,12 @@ class Converter {
     String htmlContent = pathAndHtml.getValue();
     checkState(!htmlContent.isEmpty(), format("html should not be empty, path='%s'", htmlPath));
 
-    // it's not well-formed from an xml perspective.
-    // if this is the only case of non-well-form-ed-ness, we're good
-    htmlContent = htmlContent.replace(META_LINE, "");
+    Document doc = Jsoup.parse(htmlContent);
 
-    String mdContent = joinStringList("\n", Functions.xpathList(htmlContent, "//*[@class='c2']"));
+    String mdContent = doc.select("span").text();
+
+    // replace non-breaking spaces with regular spaces (scenario 2)
+    mdContent = mdContent.replace((char)160, ' ');
 
     Map<String, String> mdPathToContent = new LinkedHashMap<>();
     mdPathToContent.put(mdPath, mdContent);

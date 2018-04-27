@@ -1,22 +1,32 @@
 package gdocmd.convert;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static gdocmd.common.Functions.mapOf;
 import static gdocmd.common.Functions.readFile;
-import static gdocmd.convert.Converter.convert;
-import static gdocmd.convert.TestFunctions.mapOf;
+import static gdocmd.convert.Converter.convertHtmlToMd;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ScenariosTest {
   @Test
   public void trivial01() {
-    Assertions.assertEquals(
-      TestFunctions.mapOf("gdocmdservice01_trivial.md",
-        readFile("scenarios/01_trivial/expected_md/gdocmdservice01_trivial.md")),
-      convert(
-        TestFunctions.mapOf("gdocmdservice01_trivial.html",
-          readFile("scenarios/01_trivial/actual_gdoc/gdocmdservice01_trivial.html"))
+    assertEquals(
+      mapOf("01_trivial.md",
+        readFile("scenarios/01_trivial/expected_md/01_trivial.md")),
+      convertHtmlToMd(
+        mapOf("01_trivial.html",
+          readFile("scenarios/01_trivial/actual_gdoc/01_trivial.html"))
+      ));
+  }
+
+  @Test
+  public void trivial02() {
+    assertEquals(
+      mapOf("02_html_entities.md",
+        readFile("scenarios/02_html_entities/expected_md/02_html_entities.md")),
+      convertHtmlToMd(
+        mapOf("02_html_entities.html",
+          readFile("scenarios/02_html_entities/actual_gdoc/02_html_entities.html"))
       ));
   }
 }

@@ -6,6 +6,8 @@ mvn -e appengine:run
 deploy
 mvn appengine:deploy
 
+X   !@#$%^&*()-+=`~’”|\/<>,. Y
+
 
 You can also [browse the local datastore](http://localhost:8080/_ah/admin).
 
