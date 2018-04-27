@@ -20,38 +20,12 @@ class ServiceConfigTest {
   }
 
   @Test
-  public void saveClientIdAndSecret() {
-    assertFalse(serviceConfig.loadGoogleClientSecretsFromGcsServicePropertiesFile().isPresent());
-
-    serviceConfig.saveClientIdAndSecret("client-id", "client-secret");
-
-    ServiceProperties expected = new ServiceProperties();
-    expected.appOauthClientId = "client-id";
-    expected.appOauthClientSecret = "client-secret";
-    assertEquals(expected, storage.serviceProperties.get());
-
-    assertEquals(
-      "client-id",
-      serviceConfig.loadGoogleClientSecretsFromGcsServicePropertiesFile().get().getInstalled().getClientId());
-
-    assertEquals(
-      "client-secret",
-      serviceConfig.loadGoogleClientSecretsFromGcsServicePropertiesFile().get().getInstalled().getClientSecret());
-  }
-
-  @Test
   public void saveEndUserAccessTokenAndRequestToken() {
     assertFalse(serviceConfig.loadGoogleCredentialFromServicePropertiesFile().isPresent());
 
-    serviceConfig.saveEndUserAccessTokenAndRequestToken("access-token", "refresh-token");
-
-    assertFalse(serviceConfig.loadGoogleCredentialFromServicePropertiesFile().isPresent());
-
-    serviceConfig.saveClientIdAndSecret("client-id", "client-secret");
+    serviceConfig.saveEndUserAccessTokenAndRefreshToken("access-token", "refresh-token");
 
     ServiceProperties expected = new ServiceProperties();
-    expected.appOauthClientId = "client-id";
-    expected.appOauthClientSecret = "client-secret";
     expected.endUserOauthAccessToken = "access-token";
     expected.endUserOauthRefreshToken = "refresh-token";
     assertEquals(expected, storage.serviceProperties.get());

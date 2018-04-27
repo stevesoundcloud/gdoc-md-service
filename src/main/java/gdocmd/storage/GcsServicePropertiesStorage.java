@@ -38,10 +38,8 @@ public class GcsServicePropertiesStorage implements ServicePropertiesStorage {
       Properties existingProperties = new Properties();
       existingProperties.load(new StringReader(maybeFileContent.get()));
       ServiceProperties sp = new ServiceProperties();
-      sp.appOauthClientId = existingProperties.getProperty(ServiceProperties.APP_OAUTH_CLIENT_ID);
-      sp.appOauthClientSecret = existingProperties.getProperty(ServiceProperties.APP_OAUTH_CLIENT_SECRET);
       sp.endUserOauthAccessToken = existingProperties.getProperty(ServiceProperties.END_USER_OAUTH_ACCESS_TOKEN);
-      sp.endUserOauthRefreshToken = existingProperties.getProperty(ServiceProperties.END_USER_OAUTH_REQUEST_TOKEN);
+      sp.endUserOauthRefreshToken = existingProperties.getProperty(ServiceProperties.END_USER_OAUTH_REFRESH_TOKEN);
       return Optional.of(sp);
     } catch (IOException e) {
       throw Throwables.propagate(e);
