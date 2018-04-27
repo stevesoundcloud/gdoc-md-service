@@ -1,10 +1,10 @@
-package gdocmd.convert;
+package gdocmd.htmltomd;
 
 import org.junit.jupiter.api.Test;
 
 import static gdocmd.common.Functions.mapOf;
 import static gdocmd.common.Functions.readFile;
-import static gdocmd.convert.Converter.convertHtmlToMd;
+import static gdocmd.htmltomd.HtmlToMdConverter.convertHtmlToMd;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ScenariosTest {

@@ -1,4 +1,4 @@
-package gdocmd.convert;
+package gdocmd.htmltomd;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -9,7 +9,7 @@ import java.util.Map;
 import static gdocmd.common.Functions.checkState;
 import static java.lang.String.format;
 
-public class Converter {
+public class HtmlToMdConverter {
 
   private static final String HTML_FILE_SUFFIX = ".html";
   private static final String MD_FILE_SUFFIX = ".md";

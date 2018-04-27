@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static gdocmd.common.Functions.mapOf;
-import static gdocmd.convert.Converter.convertHtmlToMd;
+import static gdocmd.htmltomd.HtmlToMdConverter.convertHtmlToMd;
 
 @Singleton
 public class TestDriveServlet extends HttpServlet {
