@@ -28,14 +28,11 @@ public class AdministrativeServlet extends HttpServlet {
     response.setContentType("text/html");
     response.getWriter().println("" +
       "<html>\n" +
-      "Allow this service to have read access to your GDrive by <a href=\"/do-oauth-flow\">clicking here.</a>\n" +
-      "<p>\n" +
       "<form action=\"/save-service-properties\" method=\"POST\">\n" +
-      "  OAuth Client Id: <input name=\"" + ServiceProperties.APP_OAUTH_CLIENT_ID + "\" type=\"text\"></input><br/>\n" +
-      "  OAuth Client Secret: <input name=\"" + ServiceProperties.APP_OAUTH_CLIENT_SECRET + "\" type=\"text\"></input><br/>\n" +
+      "  OAuth Access Token: <input name=\"" + ServiceProperties.END_USER_OAUTH_ACCESS_TOKEN + "\" type=\"text\"></input><br/>\n" +
+      "  OAuth Refresh Token: <input name=\"" + ServiceProperties.END_USER_OAUTH_REFRESH_TOKEN + "\" type=\"text\"></input><br/>\n" +
       "  <input type=\"submit\"></input>\n" +
       "</form>\n" +
-      "</p>\n" +
       "</html>\n");
   }
 
@@ -46,8 +43,8 @@ public class AdministrativeServlet extends HttpServlet {
       simpleParameterMap.put(key.toString(), ((String[])request.getParameterMap().get(key))[0]);
     }
 
-    serviceConfig.saveClientIdAndSecret(
-      simpleParameterMap.get(ServiceProperties.APP_OAUTH_CLIENT_ID),
-      simpleParameterMap.get(ServiceProperties.APP_OAUTH_CLIENT_SECRET));
+    serviceConfig.saveEndUserAccessTokenAndRefreshToken(
+      simpleParameterMap.get(ServiceProperties.END_USER_OAUTH_ACCESS_TOKEN),
+      simpleParameterMap.get(ServiceProperties.END_USER_OAUTH_REFRESH_TOKEN));
   }
 }

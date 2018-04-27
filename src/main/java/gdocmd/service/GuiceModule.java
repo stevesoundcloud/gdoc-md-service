@@ -15,8 +15,6 @@ public class GuiceModule extends ServletModule {
 
     serve("/testapp/*").with(MyAppServlet.class);
     serve("/testcron/*").with(MyCronServlet.class);
-    serve("/do-oauth-flow").with(OauthAuthorizationCodeServlet.class);
-    serve("/fetch-oauth-token").with(FetchOauthTokenServlet.class);
     serve("/").with(AdministrativeServlet.class);
     serve("/save-service-properties").with(AdministrativeServlet.class);
     serve("/test-drive").with(TestDriveServlet.class);

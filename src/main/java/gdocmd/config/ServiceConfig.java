@@ -19,18 +19,7 @@ public class ServiceConfig {
     this.servicePropertiesStorage = servicePropertiesStorage;
   }
 
-  public void saveClientIdAndSecret(String clientId, String clientSecret) {
-    ServiceProperties sp = new ServiceProperties();
-    Optional<ServiceProperties> maybeServiceProperties = servicePropertiesStorage.load();
-    if (maybeServiceProperties.isPresent()) {
-      sp = maybeServiceProperties.get();
-    }
-    sp.appOauthClientId = clientId;
-    sp.appOauthClientSecret = clientSecret;
-    servicePropertiesStorage.save(sp);
-  }
-
-  public void saveEndUserAccessTokenAndRequestToken(String accessToken, String refreshToken) {
+  public void saveEndUserAccessTokenAndRefreshToken(String accessToken, String refreshToken) {
     ServiceProperties sp = new ServiceProperties();
     Optional<ServiceProperties> maybeServiceProperties = servicePropertiesStorage.load();
     if (maybeServiceProperties.isPresent()) {
@@ -41,33 +30,13 @@ public class ServiceConfig {
     servicePropertiesStorage.save(sp);
   }
 
-  public Optional<GoogleClientSecrets> loadGoogleClientSecretsFromGcsServicePropertiesFile() {
-    Optional<ServiceProperties> maybeServiceProperties = servicePropertiesStorage.load();
-    if (!maybeServiceProperties.isPresent()) {
-      return Optional.empty();
-    }
-    ServiceProperties serviceProperties = maybeServiceProperties.get();
-    if (serviceProperties.appOauthClientId == null) {
-      return Optional.empty();
-    }
-
-    GoogleClientSecrets clientSecrets = new GoogleClientSecrets();
-    GoogleClientSecrets.Details details = new GoogleClientSecrets.Details();
-
-    details.setClientId(serviceProperties.appOauthClientId);
-    details.setClientSecret(serviceProperties.appOauthClientSecret);
-    clientSecrets.setInstalled(details);
-
-    return Optional.of(clientSecrets);
-  }
-
   public Optional<GoogleCredential> loadGoogleCredentialFromServicePropertiesFile() {
     Optional<ServiceProperties> maybeServiceProperties = servicePropertiesStorage.load();
     if (!maybeServiceProperties.isPresent()) {
       return Optional.empty();
     }
     ServiceProperties serviceProperties = maybeServiceProperties.get();
-    if (serviceProperties.endUserOauthAccessToken == null || serviceProperties.appOauthClientId == null) {
+    if (serviceProperties.endUserOauthAccessToken == null || serviceProperties.endUserOauthAccessToken == null) {
       return Optional.empty();
     }
 
@@ -77,7 +46,7 @@ public class ServiceConfig {
         new GoogleCredential.Builder()
           .setTransport(GoogleNetHttpTransport.newTrustedTransport())
           .setJsonFactory(JacksonFactory.getDefaultInstance())
-          .setClientSecrets(loadGoogleClientSecretsFromGcsServicePropertiesFile().get())
+          .setClientSecrets("doesnt", "matter")
           .build()
           .setAccessToken(serviceProperties.endUserOauthAccessToken)
           .setRefreshToken(serviceProperties.endUserOauthRefreshToken));

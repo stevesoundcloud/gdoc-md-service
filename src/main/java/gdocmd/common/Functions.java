@@ -39,17 +39,6 @@ public class Functions {
     return stringJoiner.toString();
   }
 
-  public static String envVarValue(String envVarName) {
-    String value = System.getenv(envVarName);
-    checkState(value != null, format("Expected environment variable named '%s' to be set", envVarName));
-    return value;
-  }
-
-  public static String utf8InputStreamToString(InputStream inputStream) {
-    try { return CharStreams.toString( new InputStreamReader( inputStream, "UTF-8" ) ); }
-    catch (Exception e) { throw Throwables.propagate(e); }
-  }
-
   public static String mask(String secret) {
     if (secret == null) {
       return "";

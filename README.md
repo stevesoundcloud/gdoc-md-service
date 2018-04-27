@@ -32,6 +32,16 @@ curl https://your-appengine-service-id.appspot.com/foo
 
 See [this gdrive folder](https://drive.google.com/drive/folders/1SyDE0Ult3-PTh-dHAfOOkr7pikkKmASW).
 
+## OAuth notes - reconsidered
+
+The playground approach
+
+w/ client id and secret, add this redirect url
+
+https://developers.google.com/oauthplayground
+
+
+
 ## OAuth notes
 
 Q: What out of this do users who run the service need to do?
