@@ -12,6 +12,9 @@ import gdocmd.gdrive.GDrive;
 import gdocmd.gdrive.GDriveFileReference;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -39,13 +42,23 @@ public class RealGDrive implements GDrive {
       FileList result =
         gDriveService.files().list()
           .setPageSize(10) // TODO: paginate
-          .setFields("files(id, name)")
+          .setFields("files(id, name, modifiedTime)")
           .setQ("mimeType = 'application/vnd.google-apps.document'")
           .setOrderBy("modifiedTime desc,name")
           .execute();
 
       return result.getFiles().stream()
-        .map(f -> new GDriveFileReference(f.getId(), f.getName()))
+        .map(f -> {
+          String modifiedTimestampUTC =
+            DateTimeFormatter.ofPattern("yyyyMMddHHmmssX")
+            .withZone(ZoneOffset.UTC)
+            .format(Instant.ofEpochMilli(f.getModifiedTime().getValue()));
+
+          return new GDriveFileReference(
+            f.getId(),
+            f.getName(),
+            modifiedTimestampUTC);
+        })
         .collect(toList());
     } catch (Exception e) {
       throw Throwables.propagate(e);

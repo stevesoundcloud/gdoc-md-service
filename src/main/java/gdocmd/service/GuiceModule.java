@@ -18,5 +18,6 @@ public class GuiceModule extends ServletModule {
     serve("/").with(AdministrativeServlet.class);
     serve("/save-service-properties").with(AdministrativeServlet.class);
     serve("/test-drive").with(TestDriveServlet.class);
+    serve("/convert").with(ConvertServlet.class);
   }
 }

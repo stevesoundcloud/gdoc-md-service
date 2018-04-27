@@ -7,4 +7,10 @@
         <description>hello world job</description>
         <schedule>every 1 minutes</schedule>
     </cron>
+
+    <cron>
+        <url>/convert</url>
+        <description>main gdoc converter job</description>
+        <schedule>every 1 minutes</schedule>
+    </cron>
 </cronentries>

@@ -3,10 +3,12 @@ package gdocmd.gdrive;
 public class GDriveFileReference {
   public final String id;
   public final String name;
+  public final String modifiedTimestampUTC;
 
-  public GDriveFileReference(String id, String name) {
+  public GDriveFileReference(String id, String name, String modifiedTimestampUTC) {
     this.id = id;
     this.name = name;
+    this.modifiedTimestampUTC = modifiedTimestampUTC;
   }
 
   @Override
@@ -17,13 +19,15 @@ public class GDriveFileReference {
     GDriveFileReference that = (GDriveFileReference) o;
 
     if (id != null ? !id.equals(that.id) : that.id != null) return false;
-    return name != null ? name.equals(that.name) : that.name == null;
+    if (name != null ? !name.equals(that.name) : that.name != null) return false;
+    return modifiedTimestampUTC != null ? modifiedTimestampUTC.equals(that.modifiedTimestampUTC) : that.modifiedTimestampUTC == null;
   }
 
   @Override
   public int hashCode() {
     int result = id != null ? id.hashCode() : 0;
     result = 31 * result + (name != null ? name.hashCode() : 0);
+    result = 31 * result + (modifiedTimestampUTC != null ? modifiedTimestampUTC.hashCode() : 0);
     return result;
   }
 
@@ -32,6 +36,7 @@ public class GDriveFileReference {
     return "GDriveFileReference{" +
       "id='" + id + '\'' +
       ", name='" + name + '\'' +
+      ", modifiedTimestampUTC='" + modifiedTimestampUTC + '\'' +
       '}';
   }
 }
