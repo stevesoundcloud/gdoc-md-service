@@ -1,38 +1,14 @@
 https://github.com/GoogleCloudPlatform/app-maven-plugin
 
 run local dev server:
-mvn -e appengine:run
+mvn -DskipTests=true -e appengine:run
+
+visit: http://localhost:8080
+You can also [browse the local datastore](http://localhost:8080/_ah/admin).
 
 deploy
 mvn appengine:deploy
 
-X   !@#$%^&*()-+=`~’”|\/<>,. Y
-
-
-You can also [browse the local datastore](http://localhost:8080/_ah/admin).
-
-
-https://cloud.google.com/appengine/docs/standard/python/microservices-on-app-engine
-
-TODO:
-
-- oauth flow - oauth token/code saves property named user.<user-id> in system.properties file
-  - need to implement a DataStore that's backed by this file
-
-## AppEngine Deployment
-
-- Set up a new AppEngine app [here](https://console.cloud.google.com/projectselector/appengine/create?lang=java&st=true).
-- run `bazel-bin/service/backend.deploy <your-appengine-service-id>`, (and the first time, go through the authorization process)
-
-Once deployed, find the service AppEngine url in the console, and try:
-```
-curl https://your-appengine-service-id.appspot.com/foo
-{'requested' : '/foo'}
-```
-
-## Scenario GDocs
-
-See [this gdrive folder](https://drive.google.com/drive/folders/1SyDE0Ult3-PTh-dHAfOOkr7pikkKmASW).
 
 ## OAuth notes - reconsidered
 
@@ -41,6 +17,40 @@ The playground approach
 w/ client id and secret, add this redirect url
 
 https://developers.google.com/oauthplayground
+
+- Go to the oauth dev playground:
+  https://developers.google.com/oauthplayground/
+- Step 1: select scopes:
+  Drive api v3, select:
+    https://www.googleapis.com/auth/drive.metadata.readonly
+    https://www.googleapis.com/auth/drive.readonly
+- Click "Authorize APIs"
+- Authorization flow happens - log in and click "Allow"
+- (Redirected back to oauth playground)
+- Click "Exchange auth code for tokens"
+- Make note of the access and request token (keep these very secret)
+
+- Now enter these tokens in
+(hackey dev mode)
+- visit: http://localhost:8080
+  - Entry in access and refresh tokens
+- Somewhere under http://localhost:8080/_ah/admin/datastore , you should see "service.properties" saved
+
+- Now try a conversion: http://localhost:8080/convert
+
+
+-----------
+
+GAE/Intellij: https://cloud.google.com/tools/intellij/docs/quickstart-IDEA
+  Add GAE Standard support to module via https://github.com/GoogleCloudPlatform/google-cloud-intellij/issues/1203#issuecomment-318904153
+  Ultimate edition needed in order to run AE in local mode (see GH issue)
+  
+https://cloud.google.com/appengine/docs/standard/python/microservices-on-app-engine
+
+## Scenario GDocs
+
+See [this gdrive folder](https://drive.google.com/drive/folders/1SyDE0Ult3-PTh-dHAfOOkr7pikkKmASW).
+
 
 
 

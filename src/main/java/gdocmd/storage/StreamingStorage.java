@@ -1,7 +1,8 @@
 package gdocmd.storage;
 
-import java.io.InputStream;
+import java.io.OutputStream;
 
 public interface StreamingStorage {
-  void writeFileToGcs(String path, String mimetype, InputStream stream);
+  void writeFileToGcs(String path, String mimetype, byte[] fileContent);
+  OutputStream createUploadOutputStream(String fileName, String mimeType);
 }
